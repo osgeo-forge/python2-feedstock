@@ -1,0 +1,48 @@
+{% set version = "2.7.15" %}
+
+package:
+  name: python2
+  version: {{ version }}
+
+source:
+  - path: .
+
+build:
+  number: 1000
+  skip_compile_pyc:
+    - "*/*.py"
+  no_link:
+    # - apps/Python27/bin/python2.7     # [unix]
+    - Library/apps/Python27/DLLs/_ctypes.pyd  # [win]
+
+requirements:
+  build:
+    - conda
+  host:
+
+test:
+  commands:
+    - python2 -V
+    - python2 -c "import sysconfig; print sysconfig.get_paths()"
+    - pip2 -V
+    - pip2 list
+
+about:
+  home: http://www.python.org/
+  license: PSF
+  license_file: LICENSE.txt
+  summary: General purpose programming language
+  description: |
+    Python is a widely used high-level, general-purpose, interpreted, dynamic
+    programming language. Its design philosophy emphasizes code
+    readability, and its syntax allows programmers to express concepts in
+    fewer lines of code than would be possible in languages such as C++ or
+    Java. The language provides constructs intended to enable clear programs
+    on both a small and large scale.
+  doc_url: https://www.python.org/doc/versions/
+  doc_source_url: https://github.com/python/pythondotorg/blob/master/docs/source/index.rst
+  dev_url: https://docs.python.org/devguide/
+
+extra:
+  recipe-maintainers:
+    - dakcarto
